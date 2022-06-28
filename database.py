@@ -1,8 +1,9 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-
 app = Flask(__name__)
+from flask_bootstrap import Bootstrap
+bootstrap = Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://banner_admin:postgres@localhost:5432/banners_project"
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -26,5 +27,4 @@ class BannersModel(db.Model):
 
 @app.route('/')
 def handle_banners():
-    print(BannersModel.query.all())
-    return render_template('home.html', my_string='Wheeeee!', my_list=[0, 1, 2, 3, 4, 5])
+    return render_template('home.html', data=BannersModel.query.all())
