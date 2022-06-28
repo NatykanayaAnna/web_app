@@ -1,19 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Flask Temple Example</title>
-</head>
-<body>
+{% extends "bootstrap/base.html" %}
+{% block content %}
     <div class="container">
-        <p>My string: {{my_string}}</p>
-        <p>Value form the list: {{my_list[3]}}</p>
-        <p>Loop through the list</p>
-        <ul>
-            {% for n in my_list %}
-            <li>{{n}}</li>
+        <table id="data" class="table table-striped">
+            <tr>
+                <td>Banner id</td>
+                <td>Image path</td>
+                <td>Image name</td>
+                <td>Url</td>
+                <td>Status</td>
+                <td>Position</td>
+            </tr>
+            {% for row in data %}
+            <tr>
+                <td>{{row.banner_id}}</td>
+                <td>{{row.image_path}}</td>
+                <td>{{row.image_name}}</td>
+                <td>{{row.url}}</td>
+                <td>{{row.status}}</td>
+                <td>{{row.position}}</td>
+            </tr>
             {% endfor %}
-        </ul>
+        </table>
+        <button>click</button>
     </div>
-</body>
-</html>
+{% endblock %}
