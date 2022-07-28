@@ -1,0 +1,20 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+<div align="center">
+    <form method="post" style="width: 300px; padding-top: 50px;">
+    <!--    <p>{{my_form.banners_name}} Name</p>-->
+    <!--    <p> {{my_form.url}} URL</p>-->
+    <!--    <p>{{my_form.image}}Image</p>-->
+    <!--    <p>{{my_form.status}} Status</p>-->
+    <!--    <p>{{my_form.position}} Position</p>-->
+    <!--    <p ><input type="submit" value="Save" class="btn btn-success"></p>-->
+        {{ wtf.form_field(my_form.banners_name) }}
+        {{ wtf.form_field(my_form.url) }}
+        {{ wtf.form_field(my_form.image) }}
+        {{ wtf.form_field(my_form.status) }}
+        {{ wtf.form_field(my_form.position) }}
+        <p><input type="submit" value="Save" class="btn btn-success"></p>
+    </form>
+</div>
+{% endblock %}

@@ -18,9 +18,13 @@
                 <td>{{row.url}}</td>
                 <td>{{row.status}}</td>
                 <td>{{row.position}}</td>
+                <td>
+                    <a id="edit-button" class="btn btn-warning">Edit</a> /
+                    <a id="delete-button" class="btn btn-danger">Delete</a>
+                </td>
             </tr>
             {% endfor %}
         </table>
-        <button>click</button>
+        <a id="add-button" class="btn btn-success" href="add">Add</a>
     </div>
 {% endblock %}
