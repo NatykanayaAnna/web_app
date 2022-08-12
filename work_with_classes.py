@@ -29,19 +29,19 @@
 #
 #
 #exercise 3
-class Lunch(object):
-    def __init__(self, menu):
-        self.menu = menu
-    def menu_price(self):
-        if self.menu == "menu1":
-            print("Your choice:", self.menu, "Price 12.00")
-        elif self.menu == "menu2":
-            print("Your choice:", self.menu, "Price 13.40")
-        else:
-            print("Error in menu")
-
-Paul = Lunch("menu1")
-print(Paul.menu_price())
+# class Lunch(object):
+#     def __init__(self, menu):
+#         self.menu = menu
+#     def menu_price(self):
+#         if self.menu == "menu1":
+#             print("Your choice:", self.menu, "Price 12.00")
+#         elif self.menu == "menu2":
+#             print("Your choice:", self.menu, "Price 13.40")
+#         else:
+#             print("Error in menu")
+#
+# Paul = Lunch("menu1")
+# print(Paul.menu_price())
 
 # exercise 4
 # class Point3D(object):
@@ -54,3 +54,21 @@ print(Paul.menu_price())
 #
 # my_point = Point3D(1, 2, 3)
 # print(my_point)
+
+
+class Cat:
+    def __init__(self, age):
+        self._age = age
+
+    @property
+    def age(self):
+        return self._age
+
+    @age.setter
+    def age(self, num):
+        self._age = num
+
+cat1 = Cat()
+cat1.age = 7
+cat1._age = 6
+print(cat1.age)

@@ -6,3 +6,4 @@ Materials for Web_app course
 3. database initialization
 4. set FLASK_APP variable 
 5. run by command: flask run
+6. run inittest by command: python -m unittest database_test 

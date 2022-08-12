@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from flask_migrate import Migrate
 import add_banner_form
 from flask_bootstrap import Bootstrap
@@ -8,6 +8,7 @@ import uuid
 
 
 app = Flask(__name__)
+app.secret_key = b'x4x58'
 app.config['SECRET_KEY'] = 'any secret string'
 bootstrap = Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = config_parcer.db_connection_string
@@ -22,8 +23,8 @@ def handle_banners():
 
 @app.route('/add', methods=['GET', 'POST'])
 def add_new_banner():
-    form = add_banner_form.AddBannerForm()
-    if request.method == 'POST':
+    form = add_banner_form.AddBannerForm(request.form)
+    if request.method == 'POST' and form.validate():
         new_banner = BannersModel()
         new_banner.banner_id = uuid.uuid4()
         new_banner.image_name = form.banners_name.data
@@ -32,7 +33,18 @@ def add_new_banner():
         new_banner.url = form.url.data
         new_banner.status = form.status.data
         new_banner.position = form.position.data
+        #  TBD try except flash error message
         db.session.add(new_banner)
         db.session.commit()
+        flash('Form successfully sended', 'success')
         return render_template('home.html', data=BannersModel.query.all())
     return render_template('add_banner.html', my_form=form)
+
+
+@app.route('/edit')
+def edit_banner():
+    banners_id = request.args.get('banners_id')
+    print(banners_id)
+    edit_row = BannersModel.query.get(banners_id)
+    print(edit_row)
+    return edit_row.image_name
