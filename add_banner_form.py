@@ -6,6 +6,6 @@ from wtforms import StringField, BooleanField, IntegerField, SelectField, valida
 class AddBannerForm(FlaskForm):
     banners_name = StringField('Banners Name', [validators.DataRequired(), validators.Length(min=2, max=50)])
     image = FileField()
-    url = StringField('Url', [validators.DataRequired(), validators.Length(min=9)])
+    url = StringField('Url', [validators.DataRequired(), validators.Length(min=6)])
     status = BooleanField('Status', default=False)
-    position = SelectField('Position', choices=[(1, 1), (2, 2), (3, 3)])
+    position = SelectField('Position', choices=[(1, 1), (2, 2), (3, 3)], coerce=int, validate_choice=False)

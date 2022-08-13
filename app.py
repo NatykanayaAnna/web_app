@@ -41,10 +41,32 @@ def add_new_banner():
     return render_template('add_banner.html', my_form=form)
 
 
-@app.route('/edit')
+@app.route('/edit', methods=['GET', 'POST'])
 def edit_banner():
+    print('GEt')
     banners_id = request.args.get('banners_id')
-    print(banners_id)
+    if request.method == "GET":
+        print("get")
     edit_row = BannersModel.query.get(banners_id)
-    print(edit_row)
-    return edit_row.image_name
+    form = add_banner_form.AddBannerForm(request.form)
+    form.banners_name.data = edit_row.image_name
+    form.image.data = None
+    form.url.data = edit_row.url
+    form.status.data = edit_row.status
+    form.position.data = edit_row.position
+    if request.method == 'POST' and form.validate():
+        print('POST')
+        edit_row = BannersModel()
+        edit_row.banner_id = uuid.uuid4()
+        edit_row.image_name = form.banners_name.data
+        # edit_row.image_path TBD create func to safe file
+        edit_row.image_path = 'test'
+        edit_row.url = form.url.data
+        edit_row.status = form.status.data
+        edit_row.position = form.position.data
+        #  TBD try except flash error message
+        db.session.commit()
+        flash('Form successfully edited', 'success')
+
+        return render_template('home.html', data=BannersModel.query.all())
+    return render_template('add_banner.html', my_form=form)
