@@ -10,7 +10,7 @@
         {% endif %}
     {% endwith %}
     <form method="post" style="width: 300px; padding-top: 50px;">
-<!--        {{ my_form.hidden_tag() }}-->
+        {{ my_form.hidden_tag() }}
         {{ wtf.form_field(my_form.banners_name) }}
         {{ wtf.form_field(my_form.url) }}
         {{ wtf.form_field(my_form.image) }}

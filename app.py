@@ -52,9 +52,7 @@ def edit_banner():
         form.url.data = edit_row.url
         form.status.data = edit_row.status
         form.position.data = edit_row.position
-    if request.method == 'POST':
-        print(form.validate())
-        print(form.errors)
+    if request.method == 'POST' and form.validate():
         edit_row.banner_id = uuid.uuid4()
         edit_row.image_name = form.banners_name.data
         # edit_row.image_path TBD create func to safe file
@@ -67,3 +65,14 @@ def edit_banner():
         flash('Form successfully edited', 'success')
         return render_template('home.html', data=BannersModel.query.all())
     return render_template('add_banner.html', my_form=form)
+
+
+@app.route('/delete')
+def delete_banner():
+    banners_id = request.args.get('banners_id')
+    delete_row = BannersModel.query.get(banners_id)
+    db.session.delete(delete_row)
+    #  TBD try except flash error message
+    db.session.commit()
+    flash('Form successfully deleted', 'success')
+    return render_template('home.html', data=BannersModel.query.all())
